@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon, PlusCircleIcon } from '@heroicons/react/24/outline
 import {HomeIcon} from '@heroicons/react/24/solid'
 function Header() {
   return (
+    <div className='shadow-sm border-b sticky top-0 bg-white z-30'>
       <div className='flex items-center justify-between max-w-6xl mx-4 xl:mx-auto'>
         <div className='cursor-pointer h-24 w-24 relative hidden lg:inline-grid'>
           <Image
@@ -30,6 +31,7 @@ function Header() {
         <PlusCircleIcon className='h-6 cursor-pointer hover:scale-125 transition-transfrom duration-200 ease-out'/>
         <img src="https://media.licdn.com/dms/image/C4E03AQGiOYOVYTUwhg/profile-displayphoto-shrink_800_800/0/1647791230223?e=1693440000&v=beta&t=1vvNV5MT77-A61qO5v1gSacCNKDY73bBSXDQmJ4LQXY" alt="Abhinav" className='h-10 rounded-full cursor-pointer'/>
         </div>
+      </div>
       </div>
   )
 }
