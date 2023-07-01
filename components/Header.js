@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
+import { MagnifyingGlassIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import {HomeIcon} from '@heroicons/react/24/solid'
 function Header() {
   return (
-      <div className='flex items-center justify-between max-w-6xl'>
+      <div className='flex items-center justify-between max-w-6xl mx-4 xl:mx-auto'>
         <div className='cursor-pointer h-24 w-24 relative hidden lg:inline-grid'>
           <Image
           src={'http://www.jennexplores.com/wp-content/uploads/2015/09/Instagram_logo_black.png'}
@@ -25,7 +25,11 @@ function Header() {
           </div>
           <input type='text' placeholder='Search' className='bg-gray-50 pl-10 border-gray-500 text-sm focus:ring-black focus:border-black rounded-md'/>
         </div>
-        <h1>Right side</h1>
+        <div className='flex space-x-4 items-center'>
+        <HomeIcon className='hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transfrom duration-200 ease-out'/>
+        <PlusCircleIcon className='h-6 cursor-pointer hover:scale-125 transition-transfrom duration-200 ease-out'/>
+        <img src="https://media.licdn.com/dms/image/C4E03AQGiOYOVYTUwhg/profile-displayphoto-shrink_800_800/0/1647791230223?e=1693440000&v=beta&t=1vvNV5MT77-A61qO5v1gSacCNKDY73bBSXDQmJ4LQXY" alt="Abhinav" className='h-10 rounded-full cursor-pointer'/>
+        </div>
       </div>
   )
 }
