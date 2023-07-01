@@ -1,5 +1,5 @@
 import React from 'react'
-import { DotsHorizontalIcon } from '@heroicons/react/24/solid';
+import {HeartIcon, ChatBubbleLeftIcon, BookmarkIcon} from '@heroicons/react/24/outline'
 export default function Post({ img, userImg, caption, username, id }) {
   return (
     <div className='bg-white my-7 border rounded-md'>
@@ -11,6 +11,14 @@ export default function Post({ img, userImg, caption, username, id }) {
         </svg>
       </div>
       <img src={img} className='object-cover w-full' alt="Post-img"/>
+
+      <div className='flex justify-between px-4 pt-4'>
+        <div className='flex space-x-4'>
+          <HeartIcon className='btn'/>
+          <ChatBubbleLeftIcon className='btn'/>
+        </div>
+        <BookmarkIcon className='btn'/>
+      </div>
     </div>
   )
 }
