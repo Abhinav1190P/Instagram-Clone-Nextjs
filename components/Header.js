@@ -41,7 +41,7 @@ export default function Header() {
           <HomeIcon className="hidden md:inline-flex  h-6 cursor-pointer hover:scale-125 transition-tranform duration-200 ease-out" />
           <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-tranform duration-200 ease-out" />
           <img
-            src="https://static.skillshare.com/uploads/users/350301760/user-image-large.jpg?753816048"
+            src="https://lh3.googleusercontent.com/a/AAcHTtdTQTn5wex-Zzu7F4dFw8HdhSh_mW72V2iMTl7_646JVGWO=s96-c-rg-br100"
             alt="user-image"
             className="h-10 rounded-full cursor-pointer"
           />

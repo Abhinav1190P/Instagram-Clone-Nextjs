@@ -3,7 +3,7 @@ export default function MiniProfile() {
     <div className="flex items-center justify-between mt-14 ml-10">
       <img
         className="h-16 rounded-full border p-[2px]"
-        src="https://static.skillshare.com/uploads/users/350301760/user-image-large.jpg?753816048"
+        src="https://lh3.googleusercontent.com/a/AAcHTtdTQTn5wex-Zzu7F4dFw8HdhSh_mW72V2iMTl7_646JVGWO=s96-c-rg-br100"
         alt="user-image"
       />
       <div className="flex-1 ml-4">
