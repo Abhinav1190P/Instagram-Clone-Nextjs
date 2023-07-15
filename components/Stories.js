@@ -28,6 +28,6 @@ export default function Stories() {
       {storyUsers.map((user) => (
         <Story key={user.id} username={user.username} img={user.img} />
       ))}
-    </div>
+    </div> 
   );
 }
