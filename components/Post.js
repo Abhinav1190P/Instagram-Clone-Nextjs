@@ -43,24 +43,24 @@ export default function Post({ img, userImg, caption, username, id }) {
         setLikes(snapshot.docs)
       }
     )
-    
+
   }, [db])
 
 
   useEffect(() => {
     setHasLiked(
-      likes.findIndex(like => like.id === session.user.uid) !== -1
+      likes.findIndex(like => like.id === session?.user?.uid) !== -1
     )
   }, [likes])
 
   const likePost = async () => {
-    if(hasLiked){
+    if (hasLiked) {
       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid))
-    }else{
-      await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
-        username: session.user.username
+    } else {
+      await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
+        username: session?.user?.username
       })
-    } 
+    }
 
   }
 
