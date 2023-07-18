@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DotsHorizontalIcon, HeartIcon, ChatIcon, BookmarkIcon, EmojiHappyIcon } from "@heroicons/react/outline";
 import { useSession } from 'next-auth/react'
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { query } from "firebase/firestore";
+import Moment from "react-moment";
 
 export default function Post({ img, userImg, caption, username, id }) {
 
   const { data: session } = useSession()
   const [comment, SetComment] = useState('')
+  const [comments, SetComments] = useState([])
+
+  useEffect(() => {
+
+    const ubsubscribe = onSnapshot(
+      query(collection(db, "posts", id, "comments"), orderBy('timestamp', 'desc')), (snapshot) => { SetComments(snapshot.docs) }
+    )
+    return ubsubscribe
+  }, [db, id])
 
   const sendComment = async (event) => {
     event.preventDefault();
     const commentToSend = comment;
     SetComment("")
 
-    await addDoc(collection(db,"posts",id,"comments"),{
+    await addDoc(collection(db, "posts", id, "comments"), {
       comment: commentToSend,
-      username:session.user.username,
-      userImage:session.user.image,
-      timestamp:serverTimestamp()
-    })
+      username: session.user.username,
+      userImage: session.user.image,
+      timestamp: serverTimestamp()
+    });
 
   }
 
@@ -47,20 +58,35 @@ export default function Post({ img, userImg, caption, username, id }) {
       }
 
 
-      <p className="p-5 truncate"><span className="font-bold mr-2">{username}</span>{caption}</p>
-
+      <p className="p-5 truncate"><span className="font-bold mr-2">
+        {username}</span>
+        {caption}
+      </p>
+      {
+        comments.length > 0 && (
+          <div className="mx-10 max-h-24 overflow-y-scroll scrollbar">
+            {comments.map(comment => (
+            <div className="flex items-center space-x-2 mb-2">
+              <img className="h-7 rounded-full object-cover" alt="user-image" src={comment.data().userImage} />
+              <p className="font-semibold">{comment.data().username}</p>
+              <p className="flex-1 truncate">{comment.data().comment}</p>
+              <Moment fromNow>{comment.data().timestamp?.toDate()}</Moment>
+              </div>
+          ))}</div>
+        )
+      }
       {
         session && (
           <form className="flex items-center p-4">
             <EmojiHappyIcon className="h-7" />
             <input
-            value={comment}
-            onChange={(e)=>SetComment(e.target.value)}
-            className="border-none flex-1 focus:ring-0" type="text" placeholder="Enter your comment..." />
+              value={comment}
+              onChange={(e) => SetComment(e.target.value)}
+              className="border-none flex-1 focus:ring-0" type="text" placeholder="Enter your comment..." />
             <button
-            type="submit"
-            onClick={sendComment}
-            disabled={!comment.trim()} className="text-blue-400 font-bold disabled:text-blue-200">Post</button>
+              type="submit"
+              onClick={sendComment}
+              disabled={!comment.trim()} className="text-blue-400 font-bold disabled:text-blue-200">Post</button>
           </form>
         )
       }
